@@ -23,7 +23,7 @@ username = response = raw_input("Please enter your name: ")
 
 def connect_to_server():
     s = socket.socket()
-    host = "127.0.0.1"
+    host = "localhost"
     port = 12345
     s.connect((host, port))
     return s
@@ -59,7 +59,7 @@ def start_sending_heart_beat_to_server():
     heart_beat_socket = connect_to_server()
 
     def heart_beat_generator():
-        heart_beat_socket.send(temp)
+        heart_beat_socket.send(temp + '\n')
 
     set_interval(heart_beat_generator,
                  this_is_heart_beat_rate_please_do_not_change_this_number_this_stupid_language_do_not_have_constant)
