@@ -1,4 +1,4 @@
-package common;
+package board;
 
 /**
  * Created by ali on 2/19/17.

@@ -1,28 +1,36 @@
 package server;
 
-import common.Board;
-import common.Point;
+import board.Board;
+import board.Point;
 import common.User;
+import userThreads.HeartBeatThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ServerMain {
     public static void main(String[] args) throws IOException {
-        ArrayList<User> onlineUsers;
+        ArrayList<User> onlineUsers = new ArrayList<User>();
+        Set<Integer> numbers = new HashSet<Integer>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
 
         Board board = new Board();
-        Point food = new Point(2, 3);
-        board.parseMap("./resources/map.txt", food);
+        Point foodDims = new Point(2, 3);
+        board.parseMap("./resources/map.txt", foodDims);
         String staticsJson = board.getStatics();
         System.out.println(staticsJson);
         ServerSocket myServer = new ServerSocket(12345);
 
         while(true) {
             Socket serverSocket = myServer.accept();
-            ServerThread st = new ServerThread(serverSocket);
+            HeartBeatThread st = new HeartBeatThread(serverSocket);
             st.start();
         }
     }
