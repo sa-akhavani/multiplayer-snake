@@ -26,17 +26,17 @@ public class HeartBeatThread extends Thread{
         String message;
         while (true) {
             alive = false;
-            new Timer().schedule(
-                    new java.util.TimerTask() {
-                        @Override
-                        public void run() {
-                            checkAlive();
-                        }
-                    },
-                    0, 5000
-            );
-            if (bgr)
-                break;
+//            new Timer().schedule(
+//                    new java.util.TimerTask() {
+//                        @Override
+//                        public void run() {
+//                            checkAlive();
+//                        }
+//                    },
+//                    0, 5000
+//            );
+//            if (bgr)
+//                break;
 
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));

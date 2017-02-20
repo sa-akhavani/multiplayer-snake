@@ -4,6 +4,7 @@ import board.Board;
 import board.Point;
 import common.User;
 import userThreads.HeartBeatThread;
+import userThreads.UserDataThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -32,6 +33,9 @@ public class ServerMain {
             Socket serverSocket = myServer.accept();
             HeartBeatThread st = new HeartBeatThread(serverSocket);
             st.start();
+            Socket userDataSocket = myServer.accept();
+            UserDataThread uds = new UserDataThread(new User(userDataSocket));
+            uds.start();
         }
     }
 }
