@@ -8,11 +8,9 @@ import java.net.Socket;
 
 public class ServerThread extends Thread{
     Socket serverSocket;
-    User user;
 
     public ServerThread(Socket ss) {
         this.serverSocket = ss;
-        user = new User();
     }
 
     public void run() {

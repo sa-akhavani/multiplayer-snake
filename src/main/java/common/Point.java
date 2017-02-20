@@ -1,4 +1,4 @@
-package server;
+package common;
 
 /**
  * Created by ali on 2/19/17.
@@ -26,5 +26,10 @@ public class Point {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + x + ", " + y + "]";
     }
 }
