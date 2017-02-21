@@ -1,6 +1,10 @@
 package calculation;
 
+import board.Board;
 import common.SharedData;
+import common.User;
+
+import java.io.IOException;
 import java.util.TimerTask;
 
 public class UpdateScheduler extends TimerTask {
@@ -13,12 +17,23 @@ public class UpdateScheduler extends TimerTask {
 
     public void run() {
         System.out.println("kir every two secends!");
-        handleActions();
-        sendMaps();
-
+//        handleActions();
+        try {
+            sendMaps();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void sendMaps() {
+    private void sendMaps() throws IOException {
+        Board b = sharedData.getBoard();
+        b.randomSnakeGenerator();
+        for (User u:
+             sharedData.getUsers()) {
+//            System.out.println(u.getNumber());
+            System.out.println(b.getMovings());
+            u.send(b.getMovings());
+        }
         /*
         TODO:
             -generate 4 maps

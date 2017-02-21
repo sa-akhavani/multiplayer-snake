@@ -14,10 +14,12 @@ public class Board {
     private Point food;
     private ArrayList<Snake> snakes;
     private ArrayList<Point> obstacles;
+    private ArrayList<Point> remove;
 
     public Board() {
         snakes = new ArrayList<Snake>();
         obstacles = new ArrayList<Point>();
+        remove = new ArrayList<Point>();
     }
 
     public String getStatics() {
@@ -26,19 +28,29 @@ public class Board {
         for (Point o: obstacles)
             output += o.toString() + ", ";
 
-        output = output.substring(0,output.length()-2);
+        output = output.substring(0, output.length()-2);
         output += "]\n}";
         return output;
     }
 
     public String getMovings() {
         String output;
-        output = "{\n\"size:\": " + size + ",\n\"obstacles\": [";
-        for (Snake s: snakes)
-            output += s.toString() + ',';
-
-        output = output.substring(0,output.length()-2);
-        output += "]\n}";
+        output = "{\n\"snakes\": [";
+        for (Snake s :
+                snakes) {
+            output += s.toString() + ", ";
+        }
+        output = output.substring(0, output.length()-2);
+        output += "],\n\"food\":" + food.toString();
+        if (remove.size() > 0) {
+            output += "\n\"remove\": ";
+            for (Point p :
+                    remove) {
+                output += p.toString() + ", ";
+            }
+            output = output.substring(0, output.length()-2);
+        }
+        output += "\n}";
         return output;
     }
 
@@ -66,5 +78,10 @@ public class Board {
         for(int i = 0; i < snakes.size(); i++) {
             snakes.get(i).randomGenerate();
         }
+    }
+
+
+    public void addSnake(Snake s) {
+        snakes.add(s);
     }
 }

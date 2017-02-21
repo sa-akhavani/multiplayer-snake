@@ -2,6 +2,7 @@ package common;
 
 import board.Board;
 import board.Point;
+import board.Snake;
 
 import java.io.IOException;
 import java.util.ArrayList;

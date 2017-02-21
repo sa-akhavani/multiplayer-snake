@@ -1,5 +1,6 @@
 package common;
 
+import board.Snake;
 import org.json.JSONObject;
 import server.Action;
 
@@ -16,6 +17,7 @@ public class User {
     private Action action;
     private String way;
     private Socket userSocket;
+    private Snake snake;
     private int number;
 
     public User(Socket userSocket, int number) {
@@ -61,5 +63,9 @@ public class User {
         String line;
         line = br.readLine();
         return line;
+    }
+
+    public void addSnake(Snake s) {
+        this.snake = s;
     }
 }

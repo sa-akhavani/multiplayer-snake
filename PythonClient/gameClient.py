@@ -46,8 +46,11 @@ def send_key_action_to_server(client, key):
 def read_moving_object_of_board(s, ex_moving_object):
     try:
         received = s.recv(1024)
+        print "doroste!"
+        print received
         return json.loads(received), True
     except:
+        print "kharab!"
         return ex_moving_object, False
 
 
@@ -122,9 +125,9 @@ def draw_map():
     def draw_initial_elements():
         screen = draw_table(map_len, map_length)
         draw_obstacles(map_len, screen, obstacles_pos, map_length)
-        # for snake in moving_object_of_board['snakes']:
-        #     draw_snake(map_len, screen, snake, map_length)
-        # draw_food(map_len, screen, moving_object_of_board['food'], map_length)
+        for snake in moving_object_of_board['snakes']:
+            draw_snake(map_len, screen, snake, map_length)
+        draw_food(map_len, screen, moving_object_of_board['food'], map_length)
         pygame.display.update()
         return screen
 
@@ -132,14 +135,17 @@ def draw_map():
         for snake in moving_object_of_board['snakes']:
             draw_snake(map_len, screen, snake, map_length)
         draw_food(map_len, screen, moving_object_of_board['food'], map_length)
-        for tail in moving_object_of_board['remove']:
-            remove(map_len, screen, tail, map_length)
+        # for tail in moving_object_of_board['remove']:
+        #     remove(map_len, screen, tail, map_length)
         pygame.display.update()
 
     map_length = 300
     map_len = board['size']
     obstacles_pos = board['obstacles']
-    # moving_object_of_board, changed = read_moving_object_of_board(client, None)
+    moving_object_of_board, changed = read_moving_object_of_board(client, None)
+
+    print "sss"
+    print moving_object_of_board['snakes']
 
     screen = draw_initial_elements()
 
@@ -147,10 +153,11 @@ def draw_map():
     client.setblocking(0)
 
     while True:
-        # moving_object_of_board, changed = read_moving_object_of_board(client, moving_object_of_board)
-
-        # if changed:
-        #     update(screen)
+        moving_object_of_board, changed = read_moving_object_of_board(client, moving_object_of_board)
+        # aaaa = client.recv(1024)
+        # print aaaa
+        if changed:
+            update(screen)
 
         for event in pygame.event.get():
             if event.type == QUIT:
