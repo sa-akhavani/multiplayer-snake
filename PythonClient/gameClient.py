@@ -31,6 +31,7 @@ def connect_to_server():
 
 def read_static_of_board(s):
     received = s.recv(1024)
+    print received
     return json.loads(received)
 
 

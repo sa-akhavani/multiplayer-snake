@@ -21,7 +21,7 @@ public class Board {
 
     public String getStatics() {
         String output;
-        output = "board = {\n'size':" + size + ",\n'obstacles': [";
+        output = "{\n\"size\":" + size + ",\n\"obstacles\": [";
         for (Point o: obstacles)
             output += o.toString() + ", ";
 
@@ -32,7 +32,7 @@ public class Board {
 
     public String getMovings() {
         String output;
-        output = "{\n'size:': " + size + ",\n'obstacles': [";
+        output = "{\n\"size:\": " + size + ",\n\"obstacles\": [";
         for (Snake s: snakes)
             output += s.toString() + ',';
 

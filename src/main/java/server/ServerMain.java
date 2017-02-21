@@ -34,7 +34,7 @@ public class ServerMain {
             HeartBeatThread st = new HeartBeatThread(serverSocket);
             st.start();
             Socket userDataSocket = myServer.accept();
-            UserDataThread uds = new UserDataThread(new User(userDataSocket));
+            UserDataThread uds = new UserDataThread(new User(userDataSocket), board);
             uds.start();
         }
     }
