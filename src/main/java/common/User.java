@@ -18,9 +18,10 @@ public class User {
     private Socket userSocket;
     private int number;
 
-    public User(Socket userSocket) {
+    public User(Socket userSocket, int number) {
         this.userSocket = userSocket;
         this.way = "down";
+        this.number = number;
     }
 
     public Socket getUserSocket() {
@@ -56,7 +57,7 @@ public class User {
         output.write(message);
         output.flush();
     }
-    public String recieve(BufferedReader br) throws IOException {
+    public String receive(BufferedReader br) throws IOException {
         String line;
         line = br.readLine();
         return line;

@@ -35,7 +35,7 @@ public class UserDataThread extends Thread{
     }
 
     private void readAction(BufferedReader br, String line) throws IOException {
-        line = user.recieve(br);
+        line = user.receive(br);
         if (line == null)
             return; // TODO: 2/21/17 Maybe we need to bgr here
         System.out.println("here: " + line);
