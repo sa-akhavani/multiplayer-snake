@@ -13,11 +13,13 @@ public class User {
     private String username;
     private Action action;
     private Transceiver transceiver;
-//    private Socket userSocket;
+    private String way;
+    //    private Socket userSocket;
     private int number;
 
     public User(Socket userSocket) {
         this.transceiver = new Transceiver(userSocket);
+        this.way = "down";
     }
 
     public String getUsername() {

@@ -122,9 +122,9 @@ def draw_map():
     def draw_initial_elements():
         screen = draw_table(map_len, map_length)
         draw_obstacles(map_len, screen, obstacles_pos, map_length)
-        for snake in moving_object_of_board['snakes']:
-            draw_snake(map_len, screen, snake, map_length)
-        draw_food(map_len, screen, moving_object_of_board['food'], map_length)
+        # for snake in moving_object_of_board['snakes']:
+        #     draw_snake(map_len, screen, snake, map_length)
+        # draw_food(map_len, screen, moving_object_of_board['food'], map_length)
         pygame.display.update()
         return screen
 
@@ -139,7 +139,7 @@ def draw_map():
     map_length = 300
     map_len = board['size']
     obstacles_pos = board['obstacles']
-    moving_object_of_board, changed = read_moving_object_of_board(client, None)
+    # moving_object_of_board, changed = read_moving_object_of_board(client, None)
 
     screen = draw_initial_elements()
 
@@ -147,10 +147,10 @@ def draw_map():
     client.setblocking(0)
 
     while True:
-        moving_object_of_board, changed = read_moving_object_of_board(client, moving_object_of_board)
+        # moving_object_of_board, changed = read_moving_object_of_board(client, moving_object_of_board)
 
-        if changed:
-            update(screen)
+        # if changed:
+            # update(screen)
 
         for event in pygame.event.get():
             if event.type == QUIT:
