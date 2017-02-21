@@ -1,23 +1,18 @@
 package calculation;
 
-import board.Board;
-import common.User;
-
-import java.util.ArrayList;
-import java.util.Set;
+import common.SharedData;
 
 public class UpdateThread extends Thread{
-    private ArrayList<User> users;
-    private Set<Integer> set;
-    private Board board;
-    public UpdateThread(ArrayList<User> users, Set<Integer> set, Board board) {
-        this.users = users;
-        this.set = set;
-        this.board = board;
+    private SharedData sharedData;
+
+    public UpdateThread(SharedData sharedData) {
+        this.sharedData = sharedData;
+
     }
 
     @Override
     public void run() {
+
 
     }
 }

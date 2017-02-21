@@ -1,19 +1,20 @@
 package userThreads;
 
+import common.SharedData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Timer;
-import java.util.concurrent.TimeoutException;
 
 public class HeartBeatThread extends Thread{
     private Socket serverSocket;
     private String username;
+    private SharedData sharedData;
 
-    public HeartBeatThread(Socket ss) {
+    public HeartBeatThread(Socket ss, SharedData sharedData) {
         this.serverSocket = ss;
+        this.sharedData = sharedData;
     }
 
     public void run() {

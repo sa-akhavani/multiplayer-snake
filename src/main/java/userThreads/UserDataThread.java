@@ -1,6 +1,6 @@
 package userThreads;
 
-import board.Board;
+import common.SharedData;
 import common.User;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +11,11 @@ import java.io.InputStreamReader;
 
 public class UserDataThread extends Thread{
     private User user;
-    private Board board;
+    private SharedData sharedData;
 
-    public UserDataThread(User user, Board board) {
+    public UserDataThread(User user, SharedData sharedData) {
         this.user = user;
-        this.board = board;
+        this.sharedData = sharedData;
     }
 
 
@@ -56,7 +56,7 @@ public class UserDataThread extends Thread{
 
     private void initialSending() {
         try {
-            user.send(board.getStatics());
+            user.send(sharedData.getBoard().getStatics());
         } catch (IOException e) {
             e.printStackTrace(); // TODO: 2/21/17 close socket
         }
