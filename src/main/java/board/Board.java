@@ -14,7 +14,6 @@ public class Board {
     private Point food;
     private ArrayList<Snake> snakes;
     private ArrayList<Point> obstacles;
-    Random rand = new Random();
 
     public Board() {
         snakes = new ArrayList<Snake>();
@@ -63,14 +62,9 @@ public class Board {
         this.food = food;
     }
 
-    public void randomChange() {
-        obstacles.clear();
-        for(int i = 0; i < 10; i++)
-        {
-            int  x = rand.nextInt(10);
-            int  y = rand.nextInt(10);
-            Point p = new Point(x, y);
-            obstacles.add(p);
+    public void randomSnakeGenerator() {
+        for(int i = 0; i < snakes.size(); i++) {
+            snakes.get(i).randomGenerate();
         }
     }
 }
