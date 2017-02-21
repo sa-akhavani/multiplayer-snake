@@ -26,7 +26,7 @@ public class UserDataThread extends Thread{
     private void initialSending() {
         try {
             user.send(board.getStatics());
-            System.out.println();
+//            System.out.println();
         } catch (IOException e) {
             e.printStackTrace(); // TODO: 2/21/17 close socket
         }
