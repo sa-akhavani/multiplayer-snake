@@ -40,7 +40,7 @@ def send_key_action_to_server(client, key):
         'username': username,
         'action': key
     }
-    client.send(json.dumps(temp))
+    client.send(json.dumps(temp) + '\n')
 
 
 def read_moving_object_of_board(s, ex_moving_object):
@@ -150,7 +150,7 @@ def draw_map():
         # moving_object_of_board, changed = read_moving_object_of_board(client, moving_object_of_board)
 
         # if changed:
-            # update(screen)
+        #     update(screen)
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -170,7 +170,6 @@ def draw_map():
                 elif event.key == pygame.K_DOWN:
                     send_key_action_to_server(client, "down")
                     print "key down."
-
 
 start_sending_heart_beat_to_server()
 client = connect_to_server()

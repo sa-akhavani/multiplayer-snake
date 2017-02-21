@@ -3,7 +3,9 @@ package common;
 import org.json.JSONObject;
 import server.Action;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -12,14 +14,17 @@ import java.net.Socket;
 public class User {
     private String username;
     private Action action;
-    private Transceiver transceiver;
     private String way;
-    //    private Socket userSocket;
+    private Socket userSocket;
     private int number;
 
     public User(Socket userSocket) {
-        this.transceiver = new Transceiver(userSocket);
+        this.userSocket = userSocket;
         this.way = "down";
+    }
+
+    public Socket getUserSocket() {
+        return userSocket;
     }
 
     public String getUsername() {
@@ -47,9 +52,13 @@ public class User {
     }
 
     public void send(String message) throws IOException {
-        transceiver.send(message);
+        PrintWriter output = new PrintWriter(userSocket.getOutputStream());
+        output.write(message);
+        output.flush();
     }
-    public String recieve() throws IOException {
-        return transceiver.recieve();
+    public String recieve(BufferedReader br) throws IOException {
+        String line;
+        line = br.readLine();
+        return line;
     }
 }
