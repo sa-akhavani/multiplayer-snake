@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by ali on 2/19/17.
@@ -14,6 +15,7 @@ public class Board {
     private ArrayList<Snake> snakes;
     private ArrayList<Point> obstacles;
     private ArrayList<Point> removes;
+    Random rand = new Random();
 
     public Board() {
         snakes = new ArrayList<Snake>();
@@ -116,6 +118,39 @@ public class Board {
         }
 
         return temp;
+    }
+
+    public void generateNewFood() {
+        int  x, y;
+        boolean success;
+
+        while (true){
+            success = true;
+            x = rand.nextInt(10);
+            y = rand.nextInt(10);
+            Point randFood = new Point(x, y);
+
+            for (Snake s:snakes) {
+                if(s.contains(randFood)){
+                    success = false;
+                    break;
+                }
+            }
+
+            for (Point p:obstacles) {
+                if(p.equals(randFood))
+                    success = false;
+                    break;
+            }
+            if(!success)
+                continue;
+
+            if (food.equals(randFood))
+                continue;
+
+            food = randFood;
+            return;
+        }
     }
 
     public int getSize() {

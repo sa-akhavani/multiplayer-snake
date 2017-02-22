@@ -93,7 +93,16 @@ public class Snake {
         this.previousTail = joints.remove(0);
         return previousTail;
     }
-        public void stretch() {
+    public void stretch() {
             joints.add(0, previousTail);
+    }
+
+    public boolean contains(Point point) {
+        for (Point p:joints) {
+            if(p.equals(point))
+                return true;
+        }
+
+            return false;
     }
 }
