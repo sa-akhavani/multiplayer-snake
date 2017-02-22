@@ -34,7 +34,7 @@ public class UpdateScheduler extends TimerTask {
             System.out.println(b.getMovings());
             u.send(b.rotate(u.getNumber()).getMovings());
         }
-        b.getRemoves().remove(p);
+        b.getRemoves().clear();
     }
 
     private void handleActions() {
@@ -43,12 +43,12 @@ public class UpdateScheduler extends TimerTask {
         for (User u:
                 sharedData.getUsers()) {
             if (u.getAction().getWay() != null) {
+                System.out.println(u.getUsername() + " - action: " + u.getAction().getWay());
                 p = u.getSnake().move(u.getAction());
                 b.addRemoving(p);
             } else {
                 System.out.println("empty :|");
             }
-
         }
         /*
         TODO: 21/02/2017

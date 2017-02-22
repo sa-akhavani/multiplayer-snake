@@ -52,12 +52,10 @@ public class UserDataThread extends Thread{
             username = actionJSON.getString("username");
             message = actionJSON.getString("action");
             // TODO: 21/02/2017 check username;
-//            System.out.println("added!");
             user.getAction().setWay(message, user.getNumber());
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }
-//        System.out.println("got an action! - " + username + '-' + message);
     }
 
     private void initialSending() {

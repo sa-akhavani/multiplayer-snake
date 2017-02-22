@@ -35,18 +35,17 @@ public class Snake {
             joints.add(new Point(1,0));
             joints.add(new Point(2,0));
         } else if (num == 2) {
-            joints.add(new Point(9,0));
-            joints.add(new Point(9,1));
-            joints.add(new Point(9,2));
-
+            joints.add(new Point(0,9));
+            joints.add(new Point(0,8));
+            joints.add(new Point(0,7));
         } else if(num == 3) {
             joints.add(new Point(9,9));
             joints.add(new Point(8,9));
             joints.add(new Point(7,9));
         } else if(num == 4) {
-            joints.add(new Point(0,9));
-            joints.add(new Point(0,8));
-            joints.add(new Point(0,7));
+            joints.add(new Point(9,0));
+            joints.add(new Point(9,1));
+            joints.add(new Point(9,2));
         }
     }
 

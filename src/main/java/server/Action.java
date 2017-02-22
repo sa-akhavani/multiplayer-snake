@@ -21,7 +21,7 @@ public class Action {
     public void setWay(String way, int num) {
         if(num == 1)
             this.way = way;
-        else if(num == 20){
+        else if(num == 2){
             if(way.equals("up"))
                 this.way = "right";
             else if(way.equals("right"))
