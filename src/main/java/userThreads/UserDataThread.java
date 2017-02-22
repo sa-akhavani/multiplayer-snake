@@ -27,6 +27,7 @@ public class UserDataThread extends Thread{
         sharedData.getBoard().addSnake(s);
         user.addSnake(s);
         s.setUser(user);
+        user.getAction().setWay("down", user.getNumber());
         try {
             String line = "";
             BufferedReader br = new BufferedReader(new InputStreamReader(user.getUserSocket().getInputStream()));
@@ -43,7 +44,7 @@ public class UserDataThread extends Thread{
         line = user.receive(br);
         if (line == null)
             return; // TODO: 2/21/17 Maybe we need to bgr here
-        System.out.println("here: " + line);
+//        System.out.println("here: " + line);
         String username = "";
         String message = "";
 
@@ -52,6 +53,7 @@ public class UserDataThread extends Thread{
             username = actionJSON.getString("username");
             message = actionJSON.getString("action");
             // TODO: 21/02/2017 check username;
+
             user.getAction().setWay(message, user.getNumber());
         } catch (JSONException e) {
             System.out.println(e.getMessage());
