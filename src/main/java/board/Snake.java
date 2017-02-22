@@ -25,7 +25,7 @@ public class Snake {
     public String toString() {
         String output = "[";
         for (Point j: joints) {
-            output += j.toString() + ",";
+            output += j.toString() + ", ";
         }
 
         output = output.substring(0,output.length()-2);

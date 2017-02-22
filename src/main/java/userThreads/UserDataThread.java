@@ -1,5 +1,6 @@
 package userThreads;
 
+import board.Snake;
 import common.SharedData;
 import common.User;
 import org.json.JSONException;
@@ -22,6 +23,9 @@ public class UserDataThread extends Thread{
     @Override
     public void run() {
         initialSending();
+        Snake s = new Snake();
+        sharedData.getBoard().addSnake(s);
+        user.addSnake(s);
         try {
             String line = "";
             BufferedReader br = new BufferedReader(new InputStreamReader(user.getUserSocket().getInputStream()));

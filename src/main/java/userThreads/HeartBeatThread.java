@@ -1,6 +1,7 @@
 package userThreads;
 
 import common.SharedData;
+import common.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +28,14 @@ public class HeartBeatThread extends Thread{
                     System.out.println("line: " + line);
                     parseHeartBeat(line);
                 }
+
+                // TODO: 2/21/17 Add user's number to set!
+                for (User u :
+                        sharedData.getUsers()) {
+                    if (this.username == u.getUsername())
+                        sharedData.getSet().add(u.getNumber());
+                }
+
                 System.out.println(this.username + " BGRed!");
                 serverSocket.close();
                 break;
