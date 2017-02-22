@@ -32,11 +32,11 @@ public class Point {
         if(num == 1)
             return new Point(x, y);
         else if (num == 2)
-            return new Point(size-x, y);
+            return new Point(x, size-y);
         else if(num == 3)
             return new Point(size-x, size-y);
         else if(num == 4)
-            return new Point(x, size-y);
+            return new Point(size-x, y);
 
         else return null; // TODO: 22/02/2017 exceprion
     }
