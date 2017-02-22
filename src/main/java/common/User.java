@@ -17,14 +17,29 @@ public class User {
     private Action action;
     private String way;
     private Socket userSocket;
-    private Snake snake;
-    private int number;
+    private Socket heartbeatSocket;
+
+    public User(int number) {
+        this.way = "down";
+        this.number = number;
+    }
 
     public User(Socket userSocket, int number) {
         this.userSocket = userSocket;
         this.way = "down";
         this.number = number;
     }
+
+    public void setUserSocket(Socket userSocket) {
+        this.userSocket = userSocket;
+    }
+
+    public void setHeartbeatSocket(Socket heartbeatSocket) {
+        this.heartbeatSocket = heartbeatSocket;
+    }
+    private Snake snake;
+
+    private int number;
 
     public Socket getUserSocket() {
         return userSocket;

@@ -17,22 +17,24 @@ public class ServerMain {
 
     public static void main(String[] args) throws IOException {
         SharedData sharedData = new SharedData();
-        String staticsJson = sharedData.getBoard().getStatics();
+            String staticsJson = sharedData.getBoard().getStatics();
             System.out.println(staticsJson);
             ServerSocket myServer = new ServerSocket(12345);
         initiateUpdateScheduler(sharedData);
 
         int number;
         while(true) {
+            Socket serverSocket = myServer.accept();
             number = getNumber(sharedData.getSet());
             if (number == -1) {
                 continue;
             }
-            Socket serverSocket = myServer.accept();
-            HeartBeatThread st = new HeartBeatThread(serverSocket, sharedData);
+            User newUser = new User(number);
+            newUser.setHeartbeatSocket(serverSocket);
+            HeartBeatThread st = new HeartBeatThread(newUser, serverSocket, sharedData);
             st.start();
             Socket userDataSocket = myServer.accept();
-            User newUser = new User(userDataSocket, number);
+            newUser.setUserSocket(userDataSocket);
             sharedData.getUsers().add(newUser);
             UserDataThread uds = new UserDataThread(newUser, sharedData);
             uds.start();

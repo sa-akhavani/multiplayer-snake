@@ -46,11 +46,8 @@ def send_key_action_to_server(client, key):
 def read_moving_object_of_board(s, ex_moving_object):
     try:
         received = s.recv(1024)
-        print "doroste!"
-        print received
         return json.loads(received), True
     except:
-        print "kharab!"
         return ex_moving_object, False
 
 

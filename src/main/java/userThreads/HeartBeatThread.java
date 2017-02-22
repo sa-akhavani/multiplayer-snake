@@ -10,33 +10,39 @@ import java.net.Socket;
 
 public class HeartBeatThread extends Thread{
     private Socket serverSocket;
-    private String username;
     private SharedData sharedData;
+    private User user;
 
-    public HeartBeatThread(Socket ss, SharedData sharedData) {
+    public HeartBeatThread(User newUser, Socket ss, SharedData sharedData) {
+        this.user = newUser;
         this.serverSocket = ss;
         this.sharedData = sharedData;
     }
 
     public void run() {
-        String message;
         String line;
         while (true) {
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
                 while ((line = br.readLine()) != null) {
                     System.out.println("line: " + line);
-                    parseHeartBeat(line);
+                    if (!parseHeartBeat(line))
+                        break;
                 }
+
+                System.out.println(sharedData.getSet());
 
                 // TODO: 2/21/17 Add user's number to set!
                 for (User u :
                         sharedData.getUsers()) {
-                    if (this.username == u.getUsername())
+                    if (user.getUsername().equals(u.getUsername())) {
+                        System.out.println(u.getNumber());
                         sharedData.getSet().add(u.getNumber());
+                    }
                 }
 
-                System.out.println(this.username + " BGRed!");
+                System.out.println(user.getUsername() + " BGRed!");
+                System.out.println(sharedData.getSet());
                 serverSocket.close();
                 break;
             } catch (IOException e) {
@@ -48,10 +54,13 @@ public class HeartBeatThread extends Thread{
 
     }
 
-    private void parseHeartBeat(String line) throws JSONException {
+    private boolean parseHeartBeat(String line) throws JSONException {
         JSONObject heartBeat = new JSONObject(line);
-        String message = "";
-        this.username = heartBeat.getString("username");
-        message = heartBeat.getString("message");
+        String username = heartBeat.getString("username");
+        String message = heartBeat.getString("message");
+        if (!message.equals("HeartBeat"))
+            return false;
+        this.user.setUsername(username);
+        return true;
     }
 }

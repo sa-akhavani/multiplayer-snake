@@ -17,7 +17,7 @@ public class UpdateScheduler extends TimerTask {
     }
 
     public void run() {
-        System.out.println("kir every two secends!");
+        System.out.println("Message every two secends!");
 //        handleActions();
         try {
             sendMaps();
