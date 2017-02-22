@@ -31,14 +31,10 @@ public class UpdateScheduler extends TimerTask {
 //        b.randomSnakeGenerator();
         for (User u:
              sharedData.getUsers()) {
+            System.out.println(b.getSnakes());
             System.out.println(b.getMovings());
             u.send(b.rotate(u.getNumber()).getMovings());
         }
-        /*
-        TODO:
-            -generate 4 maps
-            -send maps
-         */
     }
 
     private void handleActions() {

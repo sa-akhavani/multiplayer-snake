@@ -17,18 +17,18 @@ public class ServerMain {
 
     public static void main(String[] args) throws IOException {
         SharedData sharedData = new SharedData();
-            String staticsJson = sharedData.getBoard().getStatics();
-            System.out.println(staticsJson);
-            ServerSocket myServer = new ServerSocket(12345);
+        String staticsJson = sharedData.getBoard().getStatics();
+        System.out.println(staticsJson);
+        ServerSocket myServer = new ServerSocket(12345);
         initiateUpdateScheduler(sharedData);
 
         int number;
-        while(true) {
+        while (true) {
             Socket serverSocket = myServer.accept();
             number = getNumber(sharedData.getSet());
-            if (number == -1) {
+            if (number == -1)
                 continue;
-            }
+
             User newUser = new User(number);
             newUser.setHeartbeatSocket(serverSocket);
             HeartBeatThread st = new HeartBeatThread(newUser, serverSocket, sharedData);
@@ -45,16 +45,13 @@ public class ServerMain {
         if (set.contains(1)) {
             set.remove(1);
             return 1;
-        }
-        else if (set.contains(2)) {
+        } else if (set.contains(2)) {
             set.remove(2);
             return 2;
-        }
-        else if (set.contains(3)) {
+        } else if (set.contains(3)) {
             set.remove(3);
             return 3;
-        }
-        else if (set.contains(4)) {
+        } else if (set.contains(4)) {
             set.remove(4);
             return 4;
         }

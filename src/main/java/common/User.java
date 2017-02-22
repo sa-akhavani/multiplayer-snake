@@ -18,6 +18,9 @@ public class User {
     private String way;
     private Socket userSocket;
     private Socket heartbeatSocket;
+    private Snake snake;
+    private int number;
+
 
     public User(int number) {
         this.way = "down";
@@ -37,9 +40,6 @@ public class User {
     public void setHeartbeatSocket(Socket heartbeatSocket) {
         this.heartbeatSocket = heartbeatSocket;
     }
-    private Snake snake;
-
-    private int number;
 
     public Socket getUserSocket() {
         return userSocket;

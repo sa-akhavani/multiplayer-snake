@@ -23,13 +23,15 @@ public class UserDataThread extends Thread{
     @Override
     public void run() {
         initialSending();
-        Snake s = new Snake();
+        Snake s = new Snake(user.getNumber());
         sharedData.getBoard().addSnake(s);
+        System.out.println("snakes.numbers:" + sharedData.getBoard().getSnakes().size());
         user.addSnake(s);
         try {
             String line = "";
             BufferedReader br = new BufferedReader(new InputStreamReader(user.getUserSocket().getInputStream()));
             while (true) {
+                System.out.println("oo");
                 readAction(br, line);
             }
         } catch (IOException e) {
