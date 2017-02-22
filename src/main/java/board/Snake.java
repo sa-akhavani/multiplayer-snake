@@ -43,6 +43,15 @@ public class Snake {
             joints.add(p);
         }
     }
+    public Snake rotate(int num) {
+        Snake result = new Snake();
+        for (Point p:
+             joints) {
+            result.getJoint().add(p.rotate(num));
+        }
+
+        return result;
+    }
 
     //    public void strech() {
 //        if (joint.get(0).getX()) {

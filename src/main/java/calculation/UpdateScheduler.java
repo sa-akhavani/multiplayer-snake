@@ -1,6 +1,7 @@
 package calculation;
 
 import board.Board;
+import board.Snake;
 import common.SharedData;
 import common.User;
 
@@ -51,5 +52,9 @@ public class UpdateScheduler extends TimerTask {
             if food eaten generate food and stretch snakes,
             check end
          */
+    }
+
+    public Board rotateMap(int num) {
+        return sharedData.getBoard().rotate(num);
     }
 }

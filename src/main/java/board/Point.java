@@ -28,6 +28,19 @@ public class Point {
         this.y = y;
     }
 
+    public Point rotate(int num) {
+        if(num == 1)
+            return new Point(x, y);
+        else if (num == 2)
+            return new Point(10-x, y);
+        else if(num == 3)
+            return new Point(10-x, 10-y);
+        else if(num == 4)
+            return new Point(x, 10-y);
+
+        else return null; // TODO: 22/02/2017 exceprion 
+    }
+
     @Override
     public String toString() {
         return "[" + x + ", " + y + "]";

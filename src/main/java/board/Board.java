@@ -84,4 +84,63 @@ public class Board {
     public void addSnake(Snake s) {
         snakes.add(s);
     }
+
+    public void addRemoving(Point p) {
+        remove.add(p);
+    }
+
+    public Board rotate(int num) {
+        Board temp = new Board();
+        for (Snake s: snakes) {
+            temp.addSnake(s.rotate(num));
+        }
+
+        temp.setFood(food.rotate(num));
+
+        for (Point p: remove) {
+            temp.addRemoving(p.rotate(num));
+        }
+
+        return temp;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public Point getFood() {
+        return food;
+    }
+
+    public void setFood(Point food) {
+        this.food = food;
+    }
+
+    public ArrayList<Snake> getSnakes() {
+        return snakes;
+    }
+
+    public void setSnakes(ArrayList<Snake> snakes) {
+        this.snakes = snakes;
+    }
+
+    public ArrayList<Point> getObstacles() {
+        return obstacles;
+    }
+
+    public void setObstacles(ArrayList<Point> obstacles) {
+        this.obstacles = obstacles;
+    }
+
+    public ArrayList<Point> getRemove() {
+        return remove;
+    }
+
+    public void setRemove(ArrayList<Point> remove) {
+        this.remove = remove;
+    }
 }
