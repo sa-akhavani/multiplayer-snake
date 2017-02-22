@@ -60,7 +60,7 @@ public class UserDataThread extends Thread{
 
     private void initialSending() {
         try {
-            user.send(sharedData.getBoard().getStatics());
+            user.send(sharedData.getBoard().rotateStatics(user.getNumber()).getStatics());
         } catch (IOException e) {
             e.printStackTrace(); // TODO: 2/21/17 close socket
         }

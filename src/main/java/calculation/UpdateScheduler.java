@@ -28,12 +28,11 @@ public class UpdateScheduler extends TimerTask {
 
     private void sendMaps() throws IOException {
         Board b = sharedData.getBoard();
-        b.randomSnakeGenerator();
+//        b.randomSnakeGenerator();
         for (User u:
              sharedData.getUsers()) {
-//            System.out.println(u.getNumber());
             System.out.println(b.getMovings());
-            u.send(b.getMovings());
+            u.send(b.rotate(u.getNumber()).getMovings());
         }
         /*
         TODO:
