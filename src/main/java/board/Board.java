@@ -89,6 +89,10 @@ public class Board {
         remove.add(p);
     }
 
+    public void addObstacles(Point p) {
+        obstacles.add(p);
+    }
+
     public Board rotate(int num) {
         Board temp = new Board();
         for (Snake s: snakes) {
@@ -108,7 +112,7 @@ public class Board {
         Board temp = new Board();
         temp.setSize(size);
         for (Point p: obstacles) {
-            temp.addRemoving(p.rotate(num, size));
+            temp.addObstacles(p.rotate(num, size));
         }
 
         return temp;
