@@ -89,10 +89,7 @@ public class Snake {
 
     public Point move(Action action) {      //removes tail and changes head location
         int size = joints.size();
-        System.out.println("snake: " + this.toString());
         Point p = joints.get(size-1);
-        System.out.println("p: " + p);
-        System.out.println("size: " + size);
         joints.add(action.movePoint(p));
         this.previousTail = joints.remove(0);
         return previousTail;

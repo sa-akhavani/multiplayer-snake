@@ -42,14 +42,14 @@ public class Board {
         output = output.substring(0, output.length()-2);
         output += "],\n\"food\":" + food.toString();
         output += ",\n\"remove\": [";
-        if (removes.size() > 0) {
+        if (this.removes.size() > 0) {
             for (Point p :
-                    removes) {
+                    this.removes) {
                 output += p.toString() + ", ";
             }
             output = output.substring(0, output.length()-2);
         }
-        output += "]\n";
+        output += "]";
         output += "\n}";
         return output;
     }
