@@ -92,13 +92,23 @@ public class Board {
     public Board rotate(int num) {
         Board temp = new Board();
         for (Snake s: snakes) {
-            temp.addSnake(s.rotate(num));
+            temp.addSnake(s.rotate(num, size));
         }
 
-        temp.setFood(food.rotate(num));
+        temp.setFood(food.rotate(num, size));
 
         for (Point p: remove) {
-            temp.addRemoving(p.rotate(num));
+            temp.addRemoving(p.rotate(num, size));
+        }
+
+        return temp;
+    }
+
+    public Board rotateStatics(int num) {
+        Board temp = new Board();
+        temp.setSize(size);
+        for (Point p: obstacles) {
+            temp.addRemoving(p.rotate(num, size));
         }
 
         return temp;

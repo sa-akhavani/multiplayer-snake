@@ -28,17 +28,17 @@ public class Point {
         this.y = y;
     }
 
-    public Point rotate(int num) {
+    public Point rotate(int num, int size) {
         if(num == 1)
             return new Point(x, y);
         else if (num == 2)
-            return new Point(10-x, y);
+            return new Point(size-x, y);
         else if(num == 3)
-            return new Point(10-x, 10-y);
+            return new Point(size-x, size-y);
         else if(num == 4)
-            return new Point(x, 10-y);
+            return new Point(x, size-y);
 
-        else return null; // TODO: 22/02/2017 exceprion 
+        else return null; // TODO: 22/02/2017 exceprion
     }
 
     @Override

@@ -43,11 +43,11 @@ public class Snake {
             joints.add(p);
         }
     }
-    public Snake rotate(int num) {
+    public Snake rotate(int num, int size) {
         Snake result = new Snake();
         for (Point p:
              joints) {
-            result.getJoint().add(p.rotate(num));
+            result.getJoint().add(p.rotate(num, size));
         }
 
         return result;
