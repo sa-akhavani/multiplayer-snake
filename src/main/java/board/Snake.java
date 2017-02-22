@@ -1,5 +1,7 @@
 package board;
 
+import server.Action;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,6 +10,7 @@ import java.util.Random;
  */
 public class Snake {
     private ArrayList<Point> joints;
+    private Point previousTail;
     Random rand = new Random();
 
     public Snake() {
@@ -73,6 +76,16 @@ public class Snake {
         return result;
     }
 
+    public Point move(Action action) {      //removes tail and changes head location
+        int size = joints.size();
+        System.out.println("snake: " + this.toString());
+        Point p = joints.get(size-1);
+        System.out.println("p: " + p);
+        System.out.println("size: " + size);
+        joints.add(action.movePoint(p));
+        this.previousTail = joints.remove(0);
+        return previousTail;
+    }
     //    public void strech() {
 //        if (joint.get(0).getX()) {
 //

@@ -1,5 +1,7 @@
 package server;
 
+import board.Point;
+
 /**
  * Created by ali on 2/20/17.
  */
@@ -48,6 +50,21 @@ public class Action {
                 this.way = "down";
         }
         this.hasNew = true;
+    }
+
+    public Point movePoint(Point p) {
+        int x = p.getX();
+        int y = p.getY();
+        if (way.equals("up"))
+            x -= 1;
+        else if (way.equals("down"))
+            x += 1;
+        else if (way.equals("right"))
+            y += 1;
+        else if (way.equals("left"))
+            y -= 1;
+        Point newPoint = new Point(x, y);
+        return newPoint;
     }
 
     public boolean hasNew() {

@@ -25,13 +25,11 @@ public class UserDataThread extends Thread{
         initialSending();
         Snake s = new Snake(user.getNumber());
         sharedData.getBoard().addSnake(s);
-        System.out.println("snakes.numbers:" + sharedData.getBoard().getSnakes().size());
         user.addSnake(s);
         try {
             String line = "";
             BufferedReader br = new BufferedReader(new InputStreamReader(user.getUserSocket().getInputStream()));
             while (true) {
-                System.out.println("oo");
                 readAction(br, line);
             }
         } catch (IOException e) {
@@ -51,13 +49,14 @@ public class UserDataThread extends Thread{
         try {
             JSONObject actionJSON = new JSONObject(line);
             username = actionJSON.getString("username");
-            message = actionJSON.getString("message");
+            message = actionJSON.getString("action");
             // TODO: 21/02/2017 check username;
+//            System.out.println("added!");
             user.getAction().setWay(message, user.getNumber());
         } catch (JSONException e) {
-            return;
+            System.out.println(e.getMessage());
         }
-        System.out.println("got an action! - " + username + '-' + message);
+//        System.out.println("got an action! - " + username + '-' + message);
     }
 
     private void initialSending() {

@@ -113,7 +113,7 @@ def draw_map():
                          (food_pos[1] * map_length / map_len + 2, food_pos[0] * map_length / map_len + 2,
                           map_length / map_len - 2, map_length / map_len - 2))
 
-    def remove(map_len, screen, snake_tail_pos, map_length):
+    def removes(map_len, screen, snake_tail_pos, map_length):
         screen_color = (229, 189, 2)
         pygame.draw.rect(screen, screen_color,
                          (snake_tail_pos[1] * map_length / map_len + 2, snake_tail_pos[0] * map_length / map_len + 2,
@@ -132,8 +132,8 @@ def draw_map():
         for snake in moving_object_of_board['snakes']:
             draw_snake(map_len, screen, snake, map_length)
         draw_food(map_len, screen, moving_object_of_board['food'], map_length)
-        # for tail in moving_object_of_board['remove']:
-        #     remove(map_len, screen, tail, map_length)
+        # for tail in moving_object_of_board['removes']:
+        #     removes(map_len, screen, tail, map_length)
         pygame.display.update()
 
     map_length = 300

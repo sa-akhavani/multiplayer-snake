@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by ali on 2/19/17.
@@ -14,12 +13,12 @@ public class Board {
     private Point food;
     private ArrayList<Snake> snakes;
     private ArrayList<Point> obstacles;
-    private ArrayList<Point> remove;
+    private ArrayList<Point> removes;
 
     public Board() {
         snakes = new ArrayList<Snake>();
         obstacles = new ArrayList<Point>();
-        remove = new ArrayList<Point>();
+        removes = new ArrayList<Point>();
     }
 
     public String getStatics() {
@@ -42,16 +41,16 @@ public class Board {
         }
         output = output.substring(0, output.length()-2);
         output += "],\n\"food\":" + food.toString();
-        if (remove.size() > 0) {
-            output += "\n\"remove\": ";
+        if (removes.size() > 0) {
+            output += "\n\"removes\": ";
             for (Point p :
-                    remove) {
+                    removes) {
                 output += p.toString() + ", ";
             }
             output = output.substring(0, output.length()-2);
         }
         else
-        output += ",\"remove\": []";
+        output += ",\"removes\": []";
         output += "\n}";
         return output;
     }
@@ -88,7 +87,7 @@ public class Board {
     }
 
     public void addRemoving(Point p) {
-        remove.add(p);
+        removes.add(p);
     }
 
     public void addObstacles(Point p) {
@@ -103,7 +102,7 @@ public class Board {
 
         temp.setFood(food.rotate(num, size));
 
-        for (Point p: remove) {
+        for (Point p: removes) {
             temp.addRemoving(p.rotate(num, size));
         }
 
@@ -152,11 +151,11 @@ public class Board {
         this.obstacles = obstacles;
     }
 
-    public ArrayList<Point> getRemove() {
-        return remove;
+    public ArrayList<Point> getRemoves() {
+        return removes;
     }
 
-    public void setRemove(ArrayList<Point> remove) {
-        this.remove = remove;
+    public void setRemoves(ArrayList<Point> removes) {
+        this.removes = removes;
     }
 }

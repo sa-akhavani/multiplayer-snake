@@ -18,6 +18,11 @@ public class User {
     private String way;
     private Socket userSocket;
     private Socket heartbeatSocket;
+
+    public Snake getSnake() {
+        return snake;
+    }
+
     private Snake snake;
     private int number;
 
@@ -25,6 +30,7 @@ public class User {
     public User(int number) {
         this.way = "down";
         this.number = number;
+        this.action = new Action();
     }
 
     public User(Socket userSocket, int number) {

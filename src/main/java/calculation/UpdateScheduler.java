@@ -1,7 +1,7 @@
 package calculation;
 
 import board.Board;
-import board.Snake;
+import board.Point;
 import common.SharedData;
 import common.User;
 
@@ -17,7 +17,7 @@ public class UpdateScheduler extends TimerTask {
     }
 
     public void run() {
-        System.out.println("Message every two secends!");
+        System.out.println("Message every two seconds!");
 //        handleActions();
         try {
             sendMaps();
@@ -28,12 +28,19 @@ public class UpdateScheduler extends TimerTask {
 
     private void sendMaps() throws IOException {
         Board b = sharedData.getBoard();
+        Point p;
 //        b.randomSnakeGenerator();
         for (User u:
-             sharedData.getUsers()) {
-            System.out.println(b.getSnakes());
-            System.out.println(b.getMovings());
+                sharedData.getUsers()) {
+            if (u.getAction().getWay() != null) {
+                System.out.println(u.getAction().getWay());
+                p = u.getSnake().move(u.getAction());
+                b.addRemoving(p);
+                System.out.println("movings: " + b.getMovings());
+            }
+            System.out.println("empty :|");
             u.send(b.rotate(u.getNumber()).getMovings());
+//            b.getRemoves().remove(p);
         }
     }
 
