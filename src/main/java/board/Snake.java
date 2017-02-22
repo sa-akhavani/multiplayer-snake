@@ -1,5 +1,6 @@
 package board;
 
+import common.User;
 import server.Action;
 
 import java.util.ArrayList;
@@ -11,10 +12,20 @@ import java.util.Random;
 public class Snake {
     private ArrayList<Point> joints;
     private Point previousTail;
+    private User user;
+
     Random rand = new Random();
 
     public Snake() {
         joints = new ArrayList<Point>();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Snake(int num) {

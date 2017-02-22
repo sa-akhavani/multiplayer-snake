@@ -28,7 +28,7 @@ public class UpdateScheduler extends TimerTask {
 
     private void sendMaps() throws IOException {
         Board b = sharedData.getBoard();
-        Point p;
+        Point p = null;
 //        b.randomSnakeGenerator();
         for (User u:
                 sharedData.getUsers()) {
@@ -40,7 +40,7 @@ public class UpdateScheduler extends TimerTask {
             }
             System.out.println("empty :|");
             u.send(b.rotate(u.getNumber()).getMovings());
-//            b.getRemoves().remove(p);
+            b.getRemoves().remove(p);
         }
     }
 

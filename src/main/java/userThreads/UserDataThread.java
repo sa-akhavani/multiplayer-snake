@@ -26,6 +26,7 @@ public class UserDataThread extends Thread{
         Snake s = new Snake(user.getNumber());
         sharedData.getBoard().addSnake(s);
         user.addSnake(s);
+        s.setUser(user);
         try {
             String line = "";
             BufferedReader br = new BufferedReader(new InputStreamReader(user.getUserSocket().getInputStream()));
