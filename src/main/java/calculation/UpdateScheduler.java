@@ -7,22 +7,27 @@ import common.SharedData;
 import common.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 public class UpdateScheduler extends TimerTask {
 
     private SharedData sharedData;
-    private int foodNumbers = 0;
 
     public UpdateScheduler(SharedData sharedData) {
         this.sharedData = sharedData;
     }
 
     public void run() {
-        System.out.println("Message every two seconds!");
+//        System.out.println("Message every two seconds!");
         try {
-            sendMaps();
             handleActions();
+            checkFood();
+//            checkCollision();
+            if (checkWinner())
+                System.exit(0);
+
+            sendMaps();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,41 +38,66 @@ public class UpdateScheduler extends TimerTask {
         Point p = null;
         for (User u :
                 sharedData.getUsers()) {
-            System.out.println(b.getMovings());
+//            System.out.println(b.getMovings());
             u.send(b.rotate(u.getNumber()).getMovings());
         }
         b.getRemoves().clear();
     }
 
-    private void handleActions() {
+    private void handleActions() throws IOException {
         Board b = sharedData.getBoard();
         Point p;
         for (User u:
                 sharedData.getUsers()) {
-            if (u.getAction().getWay() != null) {
-                System.out.println(u.getUsername() + " - action: " + u.getAction().getWay());
-                p = u.getSnake().move(u.getAction());
-                b.addRemoving(p);
-            } else {
-                System.out.println("empty :|");
+//            System.out.println(u.getUsername() + " - action: " + u.getAction().getWay());
+            p = u.getSnake().move(u.getAction());
+            b.addRemoving(p);
+        }
+    }
+
+    private void checkCollision() throws IOException {
+        Board b = sharedData.getBoard();
+        // self collision
+        for (Snake s :
+                b.getSnakes()) {
+            if(s.selfCollision()) {
+                removeSnake(s);
             }
         }
-        /*
-        TODO: 21/02/2017
-            invoke actions,
-            move forward,
-            update map,
-            delete losers,
-            if food eaten generate food and stretch snakes,
-            check end
-         */
+        // with obstacles
+        for (Snake s :
+                b.getSnakes()) {
+            Point head = s.getHead();
+            for (Point o : b.getObstacles()) {
+                if(o.getX() == head.getX() &&  o.getY() == head.getY()) {
+                    removeSnake(s);
+                    break;
+                }
+            }
+        }
+        // out of map
+        for (Snake s :
+                b.getSnakes()) {
+            Point head = s.getHead();
+            if (head.getX() < 0 || head.getX() >= b.getSize() || head.getY() < 0 || head.getY() >= b.getSize()) {
+                removeSnake(s);
+            }
+        }
+    }
+
+    private void removeSnake(Snake s) throws IOException {
+        Board b = sharedData.getBoard();
+        b.getSnakes().remove(s);
+        System.out.println(s.getUser().getUsername() + "collapsed!");
+        sharedData.getUsers().remove(s.getUser());
+//        s.getUser().bgr();
     }
 
     public void checkFood() {
         for (Snake s: sharedData.getBoard().getSnakes()) {
-            if(s.getJoint().get(0).equals(sharedData.getBoard().getFood())) {
+            if(s.getHead().equals(sharedData.getBoard().getFood())) {
                 stretchOthers(s.getUser());
-                foodNumbers++;
+                sharedData.foodNumbers++;
                 sharedData.getBoard().generateNewFood();
                 return;
             }
@@ -86,14 +116,14 @@ public class UpdateScheduler extends TimerTask {
     public boolean checkWinner() {
         int minSize = Integer.MAX_VALUE;
         Snake winner = null;
-        if(foodNumbers == 15) {
+        if(sharedData.foodNumbers == 15) {
             for (Snake s:sharedData.getBoard().getSnakes()) {
                 if(s.getJoint().size() < minSize)
                     winner = s;
             }
 
             if(winner != null)
-                System.out.println("...and the winner is:" + winner.getUser().getUsername());
+                System.out.println("...And the winner is:" + winner.getUser().getUsername());
 
             return true;
         }

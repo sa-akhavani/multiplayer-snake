@@ -16,6 +16,11 @@ public class User {
     private String username;
     private Action action;
     private Socket userSocket;
+
+    public Socket getHeartbeatSocket() {
+        return heartbeatSocket;
+    }
+
     private Socket heartbeatSocket;
 
     public Snake getSnake() {
@@ -87,5 +92,10 @@ public class User {
 
     public void addSnake(Snake s) {
         this.snake = s;
+    }
+
+    public void bgr() throws IOException {
+        heartbeatSocket.close();
+        userSocket.close();
     }
 }

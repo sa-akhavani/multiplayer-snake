@@ -17,6 +17,7 @@ public class SharedData {
     private Set<Integer> set;
     private int num;
     private Board board;
+    public int foodNumbers = 0;
 
     public SharedData() throws IOException {
         this.users = new ArrayList<User>();

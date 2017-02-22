@@ -106,9 +106,13 @@ public class Snake {
             return false;
     }
 
+    public Point getHead() {
+        return joints.get(joints.size()-1);
+    }
+
     public boolean selfCollision() {
-        for(int i = 1; i < joints.size(); i++) {
-            if(joints.get(i).equals(joints.get(0)))
+        for(int i = 0; i < joints.size()-1; i++) {
+            if(joints.get(i).equals(getHead()))
                 return true;
         }
 
