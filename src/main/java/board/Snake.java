@@ -105,4 +105,13 @@ public class Snake {
 
             return false;
     }
+
+    public boolean selfCollision() {
+        for(int i = 1; i < joints.size(); i++) {
+            if(joints.get(i).equals(joints.get(0)))
+                return true;
+        }
+
+        return false;
+    }
 }
