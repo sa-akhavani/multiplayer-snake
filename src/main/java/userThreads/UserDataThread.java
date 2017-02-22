@@ -47,7 +47,7 @@ public class UserDataThread extends Thread{
             username = actionJSON.getString("username");
             message = actionJSON.getString("message");
             // TODO: 21/02/2017 check username;
-            user.getAction().setWay(message);
+            user.getAction().setWay(message, user.getNumber());
         } catch (JSONException e) {
             return;
         }

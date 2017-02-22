@@ -16,8 +16,37 @@ public class Action {
         return way;
     }
 
-    public void setWay(String way) {
-        this.way = way;
+    public void setWay(String way, int num) {
+        if(num == 1)
+            this.way = way;
+        else if(num == 20){
+            if(way.equals("up"))
+                this.way = "right";
+            else if(way.equals("right"))
+                this.way = "down";
+            else if(way.equals("down"))
+                this.way = "left";
+            else if(way.equals("left"))
+                this.way = "up";
+        } else if (num == 3) {
+            if(way.equals("up"))
+                this.way = "down";
+            else if(way.equals("right"))
+                this.way = "left";
+            else if(way.equals("down"))
+                this.way = "up";
+            else if(way.equals("left"))
+                this.way = "right";
+        } else if (num == 4) {
+            if(way.equals("up"))
+                this.way = "left";
+            else if(way.equals("right"))
+                this.way = "up";
+            else if(way.equals("down"))
+                this.way = "right";
+            else if(way.equals("left"))
+                this.way = "down";
+        }
         this.hasNew = true;
     }
 
