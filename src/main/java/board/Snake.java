@@ -86,9 +86,7 @@ public class Snake {
         this.previousTail = joints.remove(0);
         return previousTail;
     }
-    //    public void strech() {
-//        if (joint.get(0).getX()) {
-//
-//        }
-//    }
+        public void stretch() {
+            joints.add(0, previousTail);
+    }
 }
