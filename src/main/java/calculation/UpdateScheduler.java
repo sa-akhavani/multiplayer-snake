@@ -18,7 +18,7 @@ public class UpdateScheduler extends TimerTask {
 
     public void run() {
         System.out.println("Message every two seconds!");
-//        handleActions();
+        handleActions();
         try {
             sendMaps();
         } catch (IOException e) {
@@ -30,21 +30,30 @@ public class UpdateScheduler extends TimerTask {
         Board b = sharedData.getBoard();
         Point p = null;
 //        b.randomSnakeGenerator();
-        for (User u:
+        for (User u :
                 sharedData.getUsers()) {
-            if (u.getAction().getWay() != null) {
-                System.out.println(u.getAction().getWay());
-                p = u.getSnake().move(u.getAction());
-                b.addRemoving(p);
-                System.out.println("movings: " + b.getMovings());
-            }
-            System.out.println("empty :|");
+            System.out.println(b.rotate(u.getNumber()).getMovings());
             u.send(b.rotate(u.getNumber()).getMovings());
-            b.getRemoves().remove(p);
         }
     }
 
     private void handleActions() {
+//        Board b = sharedData.getBoard();
+        Point p = null;
+        for (User u:
+                sharedData.getUsers()) {
+            if (u.getAction().getWay() != null) {
+//                System.out.println(u.getAction().getWay());
+                System.out.println("in!");
+                p = u.getSnake().move(u.getAction());
+                sharedData.getBoard().addRemoving(p);
+//                System.out.println("movings: " + b.getMovings());
+            } else {
+                System.out.println("empty :|");
+            }
+//            u.send(b.rotate(u.getNumber()).getMovings());
+            sharedData.getBoard().getRemoves().remove(p);
+        }
         /*
         TODO: 21/02/2017
             invoke actions,

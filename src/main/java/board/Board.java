@@ -41,16 +41,15 @@ public class Board {
         }
         output = output.substring(0, output.length()-2);
         output += "],\n\"food\":" + food.toString();
+        output += ",\n\"remove\": [";
         if (removes.size() > 0) {
-            output += "\n\"removes\": ";
             for (Point p :
                     removes) {
                 output += p.toString() + ", ";
             }
             output = output.substring(0, output.length()-2);
         }
-        else
-        output += ",\"removes\": []";
+        output += "]\n";
         output += "\n}";
         return output;
     }
