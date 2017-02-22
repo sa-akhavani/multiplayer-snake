@@ -147,7 +147,7 @@ public class Board {
 
             if (food.equals(randFood))
                 continue;
-
+            removes.add(food);
             food = randFood;
             return;
         }

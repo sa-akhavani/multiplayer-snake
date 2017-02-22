@@ -2,6 +2,7 @@ package calculation;
 
 import board.Board;
 import board.Point;
+import board.Snake;
 import common.SharedData;
 import common.User;
 
@@ -11,6 +12,7 @@ import java.util.TimerTask;
 public class UpdateScheduler extends TimerTask {
 
     private SharedData sharedData;
+    private int foodNumbers = 0;
 
     public UpdateScheduler(SharedData sharedData) {
         this.sharedData = sharedData;
@@ -59,6 +61,44 @@ public class UpdateScheduler extends TimerTask {
             if food eaten generate food and stretch snakes,
             check end
          */
+    }
+
+    public void checkFood() {
+        for (Snake s: sharedData.getBoard().getSnakes()) {
+            if(s.getJoint().get(0).equals(sharedData.getBoard().getFood())) {
+                stretchOthers(s.getUser());
+                foodNumbers++;
+                sharedData.getBoard().generateNewFood();
+                return;
+            }
+        }
+    }
+
+    private void stretchOthers(User user) {
+        for (Snake s:sharedData.getBoard().getSnakes()) {
+            if(s.getUser().getUsername().equals(user.getUsername()))
+                continue;
+            else
+                user.getSnake().stretch();
+        }
+    }
+
+    public boolean checkWinner() {
+        int minSize = Integer.MAX_VALUE;
+        Snake winner = null;
+        if(foodNumbers == 15) {
+            for (Snake s:sharedData.getBoard().getSnakes()) {
+                if(s.getJoint().size() < minSize)
+                    winner = s;
+            }
+
+            if(winner != null)
+                System.out.println("...and the winner is:" + winner.getUser().getUsername());
+
+            return true;
+        }
+
+        return false;
     }
 
     public Board rotateMap(int num) {
