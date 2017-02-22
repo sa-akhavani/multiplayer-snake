@@ -15,7 +15,6 @@ import java.net.Socket;
 public class User {
     private String username;
     private Action action;
-    private String way;
     private Socket userSocket;
     private Socket heartbeatSocket;
 
@@ -28,14 +27,14 @@ public class User {
 
 
     public User(int number) {
-        this.way = "down";
+//        this.way = "down";
         this.number = number;
         this.action = new Action();
     }
 
     public User(Socket userSocket, int number) {
         this.userSocket = userSocket;
-        this.way = "down";
+//        this.way = "down";
         this.number = number;
     }
 

@@ -20,9 +20,9 @@ public class UpdateScheduler extends TimerTask {
 
     public void run() {
         System.out.println("Message every two seconds!");
-        handleActions();
         try {
             sendMaps();
+            handleActions();
         } catch (IOException e) {
             e.printStackTrace();
         }
