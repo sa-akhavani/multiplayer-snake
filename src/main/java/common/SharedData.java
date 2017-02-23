@@ -18,6 +18,7 @@ public class SharedData {
     private int num;
     private Board board;
     public int foodNumbers = 0;
+    public boolean gameStarted = false;
 
     public SharedData() throws IOException {
         this.users = new ArrayList<User>();

@@ -1,5 +1,7 @@
 package board;
 
+import common.User;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -75,13 +77,6 @@ public class Board {
         this.size = lineNo;
         this.food = food;
     }
-
-    public void randomSnakeGenerator() {
-        for(int i = 0; i < snakes.size(); i++) {
-            snakes.get(i).randomGenerate();
-        }
-    }
-
 
     public void addSnake(Snake s) {
         snakes.add(s);
@@ -191,5 +186,20 @@ public class Board {
 
     public void setRemoves(ArrayList<Point> removes) {
         this.removes = removes;
+    }
+
+    public void removeSnake(User u) {
+        for (Snake s :
+                snakes) {
+            if (s.getUser().getUsername().equals(u.getUsername())) {
+//                System.out.println(u.getUsername() + "'s snake should be removed!");
+                for (Point p :
+                        s.getJoint()) {
+                    removes.add(p);
+                }
+                snakes.remove(s);
+                break;
+            }
+        }
     }
 }

@@ -36,7 +36,8 @@ public class UserDataThread extends Thread{
             }
         } catch (IOException e) {
             // TODO: 21/02/2017 pls bgr user and close heartbeat socket;
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("nothing could be read");
         }
     }
 
@@ -52,7 +53,6 @@ public class UserDataThread extends Thread{
             JSONObject actionJSON = new JSONObject(line);
             username = actionJSON.getString("username");
             message = actionJSON.getString("action");
-            // TODO: 21/02/2017 check username;
 
             user.getAction().setWay(message, user.getNumber());
         } catch (JSONException e) {

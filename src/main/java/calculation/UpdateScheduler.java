@@ -19,13 +19,15 @@ public class UpdateScheduler extends TimerTask {
     }
 
     public void run() {
-        if (sharedData.getUsers().size() < 2) {
+        if (sharedData.getUsers().size() < 2 && !sharedData.gameStarted) {
             try {
                 sendMaps();
+                System.out.println("here!!");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
+            sharedData.gameStarted = true;
             try {
                 handleActions();
                 checkFood();
@@ -124,7 +126,13 @@ public class UpdateScheduler extends TimerTask {
     public boolean checkWinner() {
         int minSize = Integer.MAX_VALUE;
         Snake winner = null;
-        if(sharedData.foodNumbers == 2) {
+
+        if (sharedData.getUsers().size() == 1 && sharedData.gameStarted) {
+            System.out.println("...And the winner is: " + sharedData.getUsers().get(0).getUsername());
+            return true;
+        }
+
+        if(sharedData.foodNumbers == 3) {
             for (Snake s:sharedData.getBoard().getSnakes()) {
                 if(s.getJoint().size() < minSize)
                     winner = s;

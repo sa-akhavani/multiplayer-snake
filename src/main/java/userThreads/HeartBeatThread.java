@@ -32,17 +32,17 @@ public class HeartBeatThread extends Thread{
 
                 System.out.println(sharedData.getSet());
 
-                // TODO: 2/22/17 remove snake
                 for (User u :
                         sharedData.getUsers()) {
                     if (user.getUsername().equals(u.getUsername())) {
-                        System.out.println(u.getNumber());
+                        System.out.println(user.getUsername() + " BGRed!");
                         sharedData.getSet().add(u.getNumber());
+                        System.out.println(sharedData.getSet());
+                        sharedData.getBoard().removeSnake(u);
+                        sharedData.getUsers().remove(u);
+                        break;
                     }
                 }
-
-                System.out.println(user.getUsername() + " BGRed!");
-                System.out.println(sharedData.getSet());
                 serverSocket.close();
                 break;
             } catch (IOException e) {
