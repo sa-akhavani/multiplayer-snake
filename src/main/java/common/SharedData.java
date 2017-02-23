@@ -29,7 +29,7 @@ public class SharedData {
         set.add(4);
         num = 0;
         board = new Board();
-        Point foodDims = new Point(2, 3);
+        Point foodDims = new Point(2, 5);
         board.parseMap("./resources/map.txt", foodDims);
     }
 

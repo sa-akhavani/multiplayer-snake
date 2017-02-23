@@ -23,7 +23,6 @@ public class UpdateScheduler extends TimerTask {
         if (sharedData.getUsers().size() < 2 && !sharedData.gameStarted) {
             try {
                 sendMaps();
-                System.out.println("here!!");
             } catch (IOException e) {
                 e.printStackTrace();
             }
