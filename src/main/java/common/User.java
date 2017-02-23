@@ -16,6 +16,9 @@ public class User {
     private String username;
     private Action action;
     private Socket userSocket;
+    private boolean alive;
+    private Snake snake;
+    private int number;
 
     public Socket getHeartbeatSocket() {
         return heartbeatSocket;
@@ -27,9 +30,9 @@ public class User {
         return snake;
     }
 
-    private Snake snake;
-    private int number;
-
+    public boolean isAlive() {
+        return alive;
+    }
 
     public User(int number) {
 //        this.way = "down";
@@ -97,5 +100,9 @@ public class User {
     public void bgr() throws IOException {
         heartbeatSocket.close();
         userSocket.close();
+    }
+
+    public void setAlive() {
+        this.alive = true;
     }
 }

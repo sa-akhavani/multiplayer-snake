@@ -31,7 +31,6 @@ def connect_to_server():
 
 def read_static_of_board(s):
     received = s.recv(1024)
-    print received
     return json.loads(received)
 
 
@@ -141,9 +140,6 @@ def draw_map():
     map_len = board['size']
     obstacles_pos = board['obstacles']
     moving_object_of_board, changed = read_moving_object_of_board(client, None)
-
-    print "sss"
-    print moving_object_of_board['snakes']
 
     screen = draw_initial_elements()
 

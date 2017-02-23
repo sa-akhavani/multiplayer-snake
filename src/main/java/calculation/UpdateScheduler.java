@@ -27,6 +27,12 @@ public class UpdateScheduler extends TimerTask {
                 e.printStackTrace();
             }
         } else {
+                for (User u :
+                        sharedData.getUsers()) {
+                    if (!u.isAlive()) {
+                        return;
+                    }
+                }
             sharedData.gameStarted = true;
             try {
                 handleActions();
@@ -92,11 +98,22 @@ public class UpdateScheduler extends TimerTask {
         }
 
         // other snakes
-//        for (Snake s :
-//                snakes) {
-//            Point head = s.getHead();
-//
-//        }
+        ArrayList<Snake> bgredList = new ArrayList<Snake>();
+        for (Snake s:snakes) {
+            Point head = s.getHead();
+            String username = s.getUser().getUsername();
+            for (Snake other:snakes) {
+//                System.out.println(other.toString());
+                if(username.equals(other.getUser().getUsername()))
+                    continue;
+                else if(other.contains(head)) {
+                    bgredList.add(s);
+                    break;
+                }
+            }
+        }
+        for(Snake s:bgredList)
+            bgrSnake(s);
 
         // out of map
         for (Snake s :

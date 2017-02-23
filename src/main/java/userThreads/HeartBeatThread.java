@@ -61,6 +61,7 @@ public class HeartBeatThread extends Thread{
         if (!message.equals("HeartBeat"))
             return false;
         this.user.setUsername(username);
+        this.user.setAlive();
         return true;
     }
 }
