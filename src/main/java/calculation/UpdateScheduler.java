@@ -19,17 +19,24 @@ public class UpdateScheduler extends TimerTask {
     }
 
     public void run() {
-//        System.out.println("Message every two seconds!");
-        try {
-            handleActions();
-            checkFood();
+        if (sharedData.getUsers().size() < 2) {
+            try {
+                sendMaps();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                handleActions();
+                checkFood();
 //            checkCollision();
-            if (checkWinner())
-                System.exit(0);
+                if (checkWinner())
+                    System.exit(0);
 
-            sendMaps();
-        } catch (IOException e) {
-            e.printStackTrace();
+                sendMaps();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -116,7 +123,7 @@ public class UpdateScheduler extends TimerTask {
     public boolean checkWinner() {
         int minSize = Integer.MAX_VALUE;
         Snake winner = null;
-        if(sharedData.foodNumbers == 15) {
+        if(sharedData.foodNumbers == 2) {
             for (Snake s:sharedData.getBoard().getSnakes()) {
                 if(s.getJoint().size() < minSize)
                     winner = s;
