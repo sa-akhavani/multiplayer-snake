@@ -103,6 +103,7 @@ public class UpdateScheduler extends TimerTask {
     public void checkFood() {
         for (Snake s: sharedData.getBoard().getSnakes()) {
             if(s.getHead().equals(sharedData.getBoard().getFood())) {
+                System.out.println(s.getUser().getUsername() + "ate!");
                 stretchOthers(s.getUser());
                 sharedData.foodNumbers++;
                 sharedData.getBoard().generateNewFood();
@@ -116,7 +117,7 @@ public class UpdateScheduler extends TimerTask {
             if(s.getUser().getUsername().equals(user.getUsername()))
                 continue;
             else
-                user.getSnake().stretch();
+                s.stretch();
         }
     }
 
