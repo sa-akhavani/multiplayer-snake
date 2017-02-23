@@ -31,7 +31,7 @@ public class UpdateScheduler extends TimerTask {
             try {
                 handleActions();
                 checkFood();
-//            checkCollision();
+                checkCollision();
                 if (checkWinner())
                     System.exit(0);
 
@@ -66,40 +66,40 @@ public class UpdateScheduler extends TimerTask {
 
     private void checkCollision() throws IOException {
         Board b = sharedData.getBoard();
-        // self collision
-        for (Snake s :
-                b.getSnakes()) {
-            if(s.selfCollision()) {
-                removeSnake(s);
-            }
-        }
-        // with obstacles
-        for (Snake s :
-                b.getSnakes()) {
-            Point head = s.getHead();
-            for (Point o : b.getObstacles()) {
-                if(o.getX() == head.getX() &&  o.getY() == head.getY()) {
-                    removeSnake(s);
-                    break;
-                }
-            }
-        }
+//        // self collision
+//        for (Snake s :
+//                b.getSnakes()) {
+//            if(s.selfCollision()) {
+//                removeSnake(s);
+//            }
+//        }
+//        // with obstacles
+//        for (Snake s :
+//                b.getSnakes()) {
+//            Point head = s.getHead();
+//            for (Point o : b.getObstacles()) {
+//                if(o.getX() == head.getX() &&  o.getY() == head.getY()) {
+//                    removeSnake(s);
+//                    break;
+//                }
+//            }
+//        }
         // out of map
         for (Snake s :
                 b.getSnakes()) {
             Point head = s.getHead();
             if (head.getX() < 0 || head.getX() >= b.getSize() || head.getY() < 0 || head.getY() >= b.getSize()) {
-                removeSnake(s);
+                bgrSnake(s);
             }
         }
     }
 
-    private void removeSnake(Snake s) throws IOException {
+    private void bgrSnake(Snake s) throws IOException {
         Board b = sharedData.getBoard();
-        b.getSnakes().remove(s);
+        sharedData.getSet().add(s.getUser().getNumber());
+        b.removeSnake(s.getUser());
         System.out.println(s.getUser().getUsername() + "collapsed!");
         sharedData.getUsers().remove(s.getUser());
-//        s.getUser().bgr();
     }
 
     public void checkFood() {

@@ -121,8 +121,8 @@ public class Board {
 
         while (true){
             success = true;
-            x = rand.nextInt(10);
-            y = rand.nextInt(10);
+            x = rand.nextInt(size);
+            y = rand.nextInt(size);
             Point randFood = new Point(x, y);
 
             for (Snake s:snakes) {
