@@ -8,6 +8,7 @@ import common.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.TimerTask;
 
 public class UpdateScheduler extends TimerTask {
@@ -66,27 +67,41 @@ public class UpdateScheduler extends TimerTask {
 
     private void checkCollision() throws IOException {
         Board b = sharedData.getBoard();
+        ArrayList<Snake> snakes = new ArrayList<Snake>();
+        for (int i = 0; i < b.getSnakes().size(); i++) {
+            Snake s = new Snake();
+            snakes.add(s);
+        }
+        Collections.copy(snakes, b.getSnakes());
 //        // self collision
-//        for (Snake s :
-//                b.getSnakes()) {
-//            if(s.selfCollision()) {
-//                removeSnake(s);
-//            }
-//        }
+        for (Snake s :
+                snakes) {
+            if(s.selfCollision()) {
+                bgrSnake(s);
+            }
+        }
 //        // with obstacles
+        for (Snake s :
+                snakes) {
+            Point head = s.getHead();
+            for (Point o : b.getObstacles()) {
+                if(o.getX() == head.getX() &&  o.getY() == head.getY()) {
+                    bgrSnake(s);
+                    break;
+                }
+            }
+        }
+
+        // other snakes
 //        for (Snake s :
-//                b.getSnakes()) {
+//                snakes) {
 //            Point head = s.getHead();
-//            for (Point o : b.getObstacles()) {
-//                if(o.getX() == head.getX() &&  o.getY() == head.getY()) {
-//                    removeSnake(s);
-//                    break;
-//                }
-//            }
+//
 //        }
+
         // out of map
         for (Snake s :
-                b.getSnakes()) {
+                snakes) {
             Point head = s.getHead();
             if (head.getX() < 0 || head.getX() >= b.getSize() || head.getY() < 0 || head.getY() >= b.getSize()) {
                 bgrSnake(s);

@@ -61,6 +61,6 @@ public class ServerMain {
     private static void initiateUpdateScheduler(SharedData sharedData) {
         updateTimer = new Timer();
         UpdateScheduler st = new UpdateScheduler(sharedData);
-        updateTimer.schedule(st, 0, 1000);
+        updateTimer.schedule(st, 0, 1500);
     }
 }
