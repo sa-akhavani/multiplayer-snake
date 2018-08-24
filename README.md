@@ -2,4 +2,4 @@ This is a project, where we have implemented a server that manages multiplayer s
 It is written for Computer Networks course.
 We used three thread types in the server. one for handling heartbeats, another one for getting user action data, and one for scheduling the map and checking game rules.
 
-Written by: Seyyed Ali Akhavani - Mohammad Noroozi
+Written by: Seyed Ali Akhavani - Mohammad Noroozi
